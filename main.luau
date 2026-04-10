@@ -8,6 +8,7 @@ local TweenService = game:GetService('TweenService');
 local RenderStepped = RunService.RenderStepped;
 local LocalPlayer = Players.LocalPlayer;
 local Mouse = LocalPlayer:GetMouse();
+local HttpService = game:GetService("HttpService")
 
 local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end);
 
@@ -24,27 +25,52 @@ getgenv().Toggles = Toggles;
 getgenv().Options = Options;
 
 local Library = {
-    Registry = {};
-    RegistryMap = {};
+	Registry = {},
+	RegistryMap = {},
+	HudRegistry = {},
 
-    HudRegistry = {};
+	FontColor = Color3.fromRGB(255, 255, 255),
+	MainColor = Color3.fromRGB(28, 28, 28),
+	BackgroundColor = Color3.fromRGB(20, 20, 20),
+	AccentColor = Color3.fromRGB(0, 85, 255),
+	OutlineColor = Color3.fromRGB(50, 50, 50),
+	RiskColor = Color3.fromRGB(255, 50, 50),
 
-    FontColor = Color3.fromRGB(255, 255, 255);
-    MainColor = Color3.fromRGB(28, 28, 28);
-    BackgroundColor = Color3.fromRGB(20, 20, 20);
-    AccentColor = Color3.fromRGB(0, 85, 255);
-    OutlineColor = Color3.fromRGB(50, 50, 50);
-    RiskColor = Color3.fromRGB(255, 50, 50),
+	Black = Color3.new(0, 0, 0),
 
-    Black = Color3.new(0, 0, 0);
-    Font = Enum.Font.Code,
+	Folders = {
+		Directory = "fentMain",
+		Assets = "fentMain/Assets",
+	},
 
-    OpenedFrames = {};
-    DependencyBoxes = {};
+	OpenedFrames = {},
+	DependencyBoxes = {},
+	Signals = {},
+	ScreenGui = ScreenGui,
+}
 
-    Signals = {};
-    ScreenGui = ScreenGui;
-};
+local CustomFont = {}
+
+function CustomFont:New(Name, Weight, Style, Data)
+	local path = Library.Folders.Assets .. "/" .. Name
+
+	if not isfile(path .. ".ttf") then
+		writefile(path .. ".ttf", game:HttpGet(Data.Url))
+	end
+
+	return Font.new(getcustomasset(path .. ".ttf"))
+end
+
+function CustomFont:Get(Name)
+	local path = Library.Folders.Assets .. "/" .. Name .. ".ttf"
+	if isfile(path) then
+		return Font.new(getcustomasset(path))
+	end
+end
+
+Library.Font = CustomFont:New("ProggyClean", 200, "Regular", {
+	Url = "https://github.com/bluescan/proggyfonts/raw/refs/heads/master/ProggyOriginal/ProggyClean.ttf"
+})
 
 local RainbowStep = 0
 local Hue = 0
