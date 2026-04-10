@@ -684,7 +684,7 @@ do
             Size = UDim2.new(1, 0, 0, 14);
             Position = UDim2.fromOffset(5, 5);
             TextXAlignment = Enum.TextXAlignment.Left;
-            TextSize = 14;
+            TextSize = 8;
             Text = ColorPicker.Title,--Info.Default;
             TextWrapped = false;
             ZIndex = 16;
