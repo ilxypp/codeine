@@ -68,7 +68,7 @@ function CustomFont:Get(Name)
 	end
 end
 
-Library.Font = CustomFont:New("ProggyClean", 200, "Regular", {
+Library.FontFace = CustomFont:New("ProggyClean", 200, "Regular", {
 	Url = "https://github.com/bluescan/proggyfonts/raw/refs/heads/master/ProggyOriginal/ProggyClean.ttf"
 })
 
