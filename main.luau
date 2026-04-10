@@ -8,7 +8,6 @@ local TweenService = game:GetService('TweenService');
 local RenderStepped = RunService.RenderStepped;
 local LocalPlayer = Players.LocalPlayer;
 local Mouse = LocalPlayer:GetMouse();
-local HttpService = game:GetService("HttpService")
 
 local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end);
 
@@ -25,52 +24,27 @@ getgenv().Toggles = Toggles;
 getgenv().Options = Options;
 
 local Library = {
-	Registry = {},
-	RegistryMap = {},
-	HudRegistry = {},
+    Registry = {};
+    RegistryMap = {};
 
-	FontColor = Color3.fromRGB(255, 255, 255),
-	MainColor = Color3.fromRGB(28, 28, 28),
-	BackgroundColor = Color3.fromRGB(20, 20, 20),
-	AccentColor = Color3.fromRGB(0, 85, 255),
-	OutlineColor = Color3.fromRGB(50, 50, 50),
-	RiskColor = Color3.fromRGB(255, 50, 50),
+    HudRegistry = {};
 
-	Black = Color3.new(0, 0, 0),
+    FontColor = Color3.fromRGB(255, 255, 255);
+    MainColor = Color3.fromRGB(28, 28, 28);
+    BackgroundColor = Color3.fromRGB(20, 20, 20);
+    AccentColor = Color3.fromRGB(0, 85, 255);
+    OutlineColor = Color3.fromRGB(50, 50, 50);
+    RiskColor = Color3.fromRGB(255, 50, 50),
 
-	Folders = {
-		Directory = "fentMain",
-		Assets = "fentMain/Assets",
-	},
+    Black = Color3.new(0, 0, 0);
+    Font = Enum.Font.Code,
 
-	OpenedFrames = {},
-	DependencyBoxes = {},
-	Signals = {},
-	ScreenGui = ScreenGui,
-}
+    OpenedFrames = {};
+    DependencyBoxes = {};
 
-local CustomFont = {}
-
-function CustomFont:New(Name, Weight, Style, Data)
-	local path = Library.Folders.Assets .. "/" .. Name
-
-	if not isfile(path .. ".ttf") then
-		writefile(path .. ".ttf", game:HttpGet(Data.Url))
-	end
-
-	return Font.new(getcustomasset(path .. ".ttf"))
-end
-
-function CustomFont:Get(Name)
-	local path = Library.Folders.Assets .. "/" .. Name .. ".ttf"
-	if isfile(path) then
-		return Font.new(getcustomasset(path))
-	end
-end
-
-Library.FontFace = CustomFont:New("ProggyClean", 200, "Regular", {
-	Url = "https://github.com/bluescan/proggyfonts/raw/refs/heads/master/ProggyOriginal/ProggyClean.ttf"
-})
+    Signals = {};
+    ScreenGui = ScreenGui;
+};
 
 local RainbowStep = 0
 local Hue = 0
@@ -684,7 +658,7 @@ do
             Size = UDim2.new(1, 0, 0, 14);
             Position = UDim2.fromOffset(5, 5);
             TextXAlignment = Enum.TextXAlignment.Left;
-            TextSize = 8;
+            TextSize = 14;
             Text = ColorPicker.Title,--Info.Default;
             TextWrapped = false;
             ZIndex = 16;
