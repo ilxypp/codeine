@@ -46,6 +46,10 @@ function UI:AddSection(tabName, sectionName, side)
     return section
 end
 
+function UI:Section(tabName, sectionName, side)
+    return self:AddSection(tabName, sectionName, side)
+end
+
 function UI:AddToggle(section, props)
     return section:Toggle(props)
 end
@@ -69,6 +73,26 @@ end
 
 function UI:AddLabel(section, text, side)
     return section:Label(text, side or "Left")
+end
+
+function UI:Notify(text, duration, color)
+    return self.Library:Notification(
+        text,
+        duration or 5,
+        color or self.Library.Theme and self.Library.Theme.Accent or Color3.fromRGB(255, 255, 255)
+    )
+end
+
+function UI:NotifySuccess(text)
+    return self:Notify(text, 4, Color3.fromRGB(0, 255, 0))
+end
+
+function UI:NotifyError(text)
+    return self:Notify(text, 5, Color3.fromRGB(255, 0, 0))
+end
+
+function UI:NotifyInfo(text)
+    return self:Notify(text, 4, self.Library.Theme.Accent)
 end
 
 return UI
