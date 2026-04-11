@@ -79,28 +79,33 @@ function UI:Notify(text, duration, color)
     return self.Library:Notification(
         text,
         duration or 5,
-        color or self.Library.Theme and self.Library.Theme.Accent or Color3.fromRGB(255, 255, 255)
+        color or (self.Library.Theme and self.Library.Theme.Accent or Color3.fromRGB(255,255,255))
     )
 end
 
 function UI:NotifySuccess(text)
-    return self:Notify(text, 4, Color3.fromRGB(0, 255, 0))
+    return self:Notify(text, 4, Color3.fromRGB(0,255,0))
 end
 
 function UI:NotifyError(text)
-    return self:Notify(text, 5, Color3.fromRGB(255, 0, 0))
+    return self:Notify(text, 5, Color3.fromRGB(255,0,0))
 end
 
 function UI:NotifyInfo(text)
-    return self:Notify(text, 4, self.Library.Theme.Accent)
+    return self:Notify(text, 4)
 end
 
 function UI:CreateSettings()
+    if self.Pages["Settings"] then
+        return self.Pages["Settings"].Page
+    end
+
     self:AddTab("Settings", {Columns = 2})
-    self._settings = true
+    return self.Pages["Settings"].Page
 end
 
 function UI:SettingsSection(name, side)
+    self:CreateSettings()
     return self:Section("Settings", name, side)
 end
 
@@ -194,6 +199,27 @@ function UI:InitConfigSystem(section)
     })
 
     Library:RefreshConfigsList(ConfigList)
+end
+
+function UI:InitMenu(section)
+    local Library = self.Library
+
+    section:Button():NewButton({
+        Name = "Unload",
+        Callback = function()
+            Library:Unload()
+        end
+    })
+
+    section:Label("Menu Keybind", "Left"):Keybind({
+        Name = "MenuKeybind",
+        Flag = "MenuKeybind",
+        Mode = "Toggle",
+        Default = Library.MenuKeybind,
+        Callback = function()
+            Library.MenuKeybind = Library.Flags["MenuKeybind"].Key
+        end
+    })
 end
 
 return UI
