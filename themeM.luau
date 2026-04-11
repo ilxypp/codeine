@@ -5,10 +5,7 @@ local ThemeManager = {} do
 
 	ThemeManager.Library = nil
 	ThemeManager.BuiltInThemes = {
-	  ['Default'] = { 1, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1e1842","AccentColor":"c50754","BackgroundColor":"191335","OutlineColor":"3c355d"}') },
-	  ['Midnight'] = { 2, httpService:JSONDecode('{"FontColor":"e6e6e6","MainColor":"0f0f14","AccentColor":"7c4dff","BackgroundColor":"0a0a0f","OutlineColor":"1c1c24"}') },
-	  ['Haze'] = { 3, httpService:JSONDecode('{"FontColor":"f3e8ff","MainColor":"1a1025","AccentColor":"b388ff","BackgroundColor":"0f0a14","OutlineColor":"2a1a3b"}') },
-	  ['Arctic'] = { 4, httpService:JSONDecode('{"FontColor":"eaf6ff","MainColor":"101820","AccentColor":"5bc0eb","BackgroundColor":"0a1118","OutlineColor":"1b2a3a"}') },
+	  ['Default'] = { 1, httpService:JSONDecode('{"FontColor":"e6e8ff","MainColor":"0f1220","AccentColor":"7a7cff","BackgroundColor":"0b0d18","OutlineColor":"1a1f33"}') },
   }
 
 	function ThemeManager:ApplyTheme(theme)
