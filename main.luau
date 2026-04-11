@@ -1,101 +1,6 @@
 --[[
     bitchbot v1
     Made by samet
-
-    Example at bottom
-    Assign different flags to each element to prevent from configs overriding eachother
-
-    Documentation:
-    function Library:Notification(Text: string, Duration: number/float, Color: Color3)
-
-    function Library:Window(Data: table
-        Name/name: string,
-        Size/size: UDim2,
-        FadeSpeed/fadespeed: number/float
-    )
-
-    function Window:Page(Data: table
-        Icon/icon: string,
-        Columns/columns: number
-    )
-
-    function Page:Section(Data: table
-        Name/name: string,
-        Side/side: number
-    )
-
-    function Section:Label(Text: string, Alignment: string)
-        function Label:Keybind(Data: table
-            Name/name: string,
-            Mode/mode: string,
-            Default/default: EnumItem,
-            Flag/flag: string,
-            Callback/callback: function
-        )
-
-        function Label:Colorpicker(Data: table
-            Name/name: string,
-            Flag/flag: string,
-            Default/default: Color3,
-            Alpha/alpha: number,
-            Callback/callback: function
-        )
-    
-    function Section:Button(void)
-        function Button:NewButton(Data: table
-            Name/name: string,
-            Callback/callback: function
-        )
-
-    function Section:Toggle(Data: table
-        Name/name: string,
-        Default/default: boolean,
-        Flag/flag: string,
-        Callback/callback: function
-    )
-        function Toggle:Keybind(Data: table
-            Name/name: string,
-            Mode/mode: string,
-            Default/default: EnumItem,
-            Flag/flag: string,
-            Callback/callback: function
-        )
-
-        function Toggle:Colorpicker(Data: table
-            Name/name: string,
-            Flag/flag: string,
-            Default/default: Color3,
-            Alpha/alpha: number,
-            Callback/callback: function
-        )
-
-    function Section:Slider(Data: table
-        Name/name: string,
-        Min/min: number,
-        Max/max: number,
-        Decimals/decimals: number,
-        Default/default: number,
-        Suffix/suffix: string,
-        Flag/flag: string,
-        Callback/callback: function
-    )
-
-    function Section:Dropdown(Data: table
-        Name/name: string,
-        Default/default: string,
-        Flag/flag: string,
-        Multi/multi: boolean,
-        Items/items: table,
-        Callback/callback: function
-    )
-
-    function Section:Textbox(Data: table
-        Name/name: string,
-        Default/default: string,
-        Placeholder/placeholder: string,
-        Flag/flag: string,
-        Callback/callback: function
-    )
 ]]
 
 if getgenv().Library and getgenv().Library.Unload then 
@@ -158,17 +63,16 @@ local Library do
 
         MenuKeybind = tostring(Enum.KeyCode.RightControl), 
         Flags = { },
-
         Tween = {
-            Time = 0.25,
-            Style = Enum.EasingStyle.Quart,
-            Direction = Enum.EasingDirection.Out
+            Time = 0.55,
+            Style = Enum.EasingStyle.Sine,
+            Direction = Enum.EasingDirection.InOut
         },
 
         Folders = {
-            Directory = "bitchbot",
-            Configs = "bitchbot/Configs",
-            Assets = "bitchbot/Assets",
+            Directory = "fent",
+            Configs = "fent/Configs",
+            Assets = "fent/Assets",
         },
 
         Images = {
@@ -177,8 +81,6 @@ local Library do
             ["Hue"] = { "Hue.png", "https://github.com/sametexe001/images/blob/main/horizontalhue.png?raw=true" },
             ["Checkers"] = { "Checkers.png", "https://github.com/sametexe001/images/blob/main/checkers.png?raw=true" },
         },
-
-        -- Ignore below
         Pages = { },
         Sections = { },
 
@@ -283,18 +185,18 @@ local Library do
 
     local Themes = {
         ["Preset"] = {
-            ["Background"] = FromRGB(39, 39, 44),
-            ["Inline"] = FromRGB(61, 60, 65),
-            ["Outline"] = FromRGB(61, 60, 65),
-            ["Page Background"] = FromRGB(49, 48, 52),
-            ["Border"] = FromRGB(31, 25, 36),
-            ["Accent"] = FromRGB(139, 69, 182),
-            ["Text Border"] = FromRGB(0, 0, 0),
-            ["Light Accent"] = FromRGB(139, 94, 216),
-            ["Element"] = FromRGB(39, 39, 44),
-            ["Text"] = FromRGB(230, 230, 230),
-            ["Inactive Text"] = FromRGB(185, 185, 185)
-        }
+    		["Background"] = FromRGB(18, 20, 28),
+    		["Inline"] = FromRGB(28, 30, 40),
+    		["Outline"] = FromRGB(40, 44, 58),
+    		["Page Background"] = FromRGB(14, 16, 24),
+    		["Border"] = FromRGB(30, 34, 48),
+    		["Accent"] = FromRGB(110, 120, 255),
+    		["Text Border"] = FromRGB(0, 0, 0),
+    		["Light Accent"] = FromRGB(160, 170, 255),
+    		["Element"] = FromRGB(22, 24, 34),
+    		["Text"] = FromRGB(235, 238, 245),
+    		["Inactive Text"] = FromRGB(150, 155, 170)
+		}
     }
 
     Library.Theme = TableClone(Themes["Preset"])
