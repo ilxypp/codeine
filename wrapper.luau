@@ -95,4 +95,105 @@ function UI:NotifyInfo(text)
     return self:Notify(text, 4, self.Library.Theme.Accent)
 end
 
+function UI:CreateSettings()
+    self:AddTab("Settings", {Columns = 2})
+    self._settings = true
+end
+
+function UI:SettingsSection(name, side)
+    return self:Section("Settings", name, side)
+end
+
+function UI:InitConfigSystem(section)
+    local Library = self.Library
+
+    local ConfigName
+    local ConfigSelected
+
+    local ConfigList = section:Dropdown({
+        Name = "Configs",
+        Flag = "ConfigsList",
+        Items = {},
+        Callback = function(v)
+            ConfigSelected = v
+        end
+    })
+
+    section:Textbox({
+        Name = "Config Name",
+        Flag = "ConfigName",
+        Callback = function(v)
+            ConfigName = v
+        end
+    })
+
+    section:Button():NewButton({
+        Name = "Create",
+        Callback = function()
+            if not ConfigName or ConfigName == "" then return end
+
+            local path = Library.Folders.Configs .. "/" .. ConfigName .. ".json"
+
+            if isfile(path) then
+                self:NotifyError("Config already exists")
+                return
+            end
+
+            writefile(path, Library:GetConfig())
+            self:NotifySuccess("Created config " .. ConfigName)
+
+            Library:RefreshConfigsList(ConfigList)
+        end
+    })
+
+    section:Button():NewButton({
+        Name = "Delete",
+        Callback = function()
+            if not ConfigSelected then return end
+
+            Library:DeleteConfig(ConfigSelected)
+            self:NotifySuccess("Deleted config " .. ConfigSelected)
+
+            Library:RefreshConfigsList(ConfigList)
+        end
+    })
+
+    section:Button():NewButton({
+        Name = "Save",
+        Callback = function()
+            if not ConfigSelected then return end
+
+            Library:SaveConfig(ConfigSelected)
+            self:NotifySuccess("Saved config " .. ConfigSelected)
+        end
+    })
+
+    section:Button():NewButton({
+        Name = "Load",
+        Callback = function()
+            if not ConfigSelected then return end
+
+            local ok, err = Library:LoadConfig(
+                readfile(Library.Folders.Configs .. "/" .. ConfigSelected)
+            )
+
+            if not ok then
+                self:NotifyError(err)
+            else
+                self:NotifySuccess("Loaded config " .. ConfigSelected)
+            end
+        end
+    })
+
+    section:Button():NewButton({
+        Name = "Refresh",
+        Callback = function()
+            Library:RefreshConfigsList(ConfigList)
+            self:NotifyInfo("Refreshed configs")
+        end
+    })
+
+    Library:RefreshConfigsList(ConfigList)
+end
+
 return UI
