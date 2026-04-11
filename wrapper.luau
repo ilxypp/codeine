@@ -1,5 +1,3 @@
--- shortly explained: this is my api wrapper for the library so its easier to add tabs sections etc, free to use idc
-
 local UI = {}
 UI.__index = UI
 
@@ -73,6 +71,26 @@ end
 
 function UI:AddLabel(section, text, side)
     return section:Label(text, side or "Left")
+end
+
+function UI:AddColorpicker(object, props)
+    return object:Colorpicker({
+        Name = props.Name,
+        Flag = props.Flag,
+        Default = props.Default,
+        Alpha = props.Alpha,
+        Callback = props.Callback
+    })
+end
+
+function UI:AddKeybind(object, props)
+    return object:Keybind({
+        Name = props.Name,
+        Flag = props.Flag,
+        Default = props.Default,
+        Mode = props.Mode,
+        Callback = props.Callback
+    })
 end
 
 function UI:Notify(text, duration, color)
