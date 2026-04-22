@@ -5,7 +5,7 @@ local ThemeManager = {} do
 
 	ThemeManager.Library = nil
 	ThemeManager.BuiltInThemes = {
-	  ['Default'] = { 1, httpService:JSONDecode('{"FontColor":"e6e8ff","MainColor":"0f1220","AccentColor":"7a7cff","BackgroundColor":"0b0d18","OutlineColor":"1a1f33"}') },
+	  ['Default'] = { 1, httpService:JSONDecode('{"FontColor":"ffe4e1","MainColor":"ff69b4","AccentColor":"ff69b4","BackgroundColor":"0d0d0d","OutlineColor":"c71585"}') },
   }
 
 	function ThemeManager:ApplyTheme(theme)
@@ -69,12 +69,6 @@ local ThemeManager = {} do
 	end
 
 	function ThemeManager:CreateThemeManager(groupbox)
-		groupbox:AddLabel('Background color'):AddColorPicker('BackgroundColor', { Default = self.Library.BackgroundColor });
-		groupbox:AddLabel('Main color')	:AddColorPicker('MainColor', { Default = self.Library.MainColor });
-		groupbox:AddLabel('Accent color'):AddColorPicker('AccentColor', { Default = self.Library.AccentColor });
-		groupbox:AddLabel('Outline color'):AddColorPicker('OutlineColor', { Default = self.Library.OutlineColor });
-		groupbox:AddLabel('Font color')	:AddColorPicker('FontColor', { Default = self.Library.FontColor });
-
 		local ThemesArray = {}
 		for Name, Theme in next, self.BuiltInThemes do
 			table.insert(ThemesArray, Name)
