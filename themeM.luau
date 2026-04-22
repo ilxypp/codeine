@@ -10,6 +10,7 @@ local ThemeManager = {} do
 
 	function ThemeManager:ApplyTheme(theme)
 		local customThemeData = self:GetCustomTheme(theme)
+		local data = customThemeData or self.BuiltInThemes[theme]
 
 		if not data then return end
 
