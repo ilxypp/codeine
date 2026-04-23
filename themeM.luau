@@ -5,7 +5,16 @@ local ThemeManager = {} do
 
 	ThemeManager.Library = nil
 	ThemeManager.BuiltInThemes = {
-		['Default'] = { 1, httpService:JSONDecode('{"FontColor":"f8bbd0","MainColor":"1a1a1a","AccentColor":"ff1493","BackgroundColor":"0b0b0b","OutlineColor":"4a0024"}') },
+		['Retro'] = { 
+    1, 
+    httpService:JSONDecode('{
+        "FontColor":"ffd1dc",
+        "MainColor":"141026",
+        "AccentColor":"ff2e88",
+        "BackgroundColor":"0a0a12",
+        "OutlineColor":"5a2a82"
+    }') 
+},,
 	}
 
 	function ThemeManager:ApplyTheme(theme)
