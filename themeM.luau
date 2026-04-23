@@ -14,7 +14,7 @@ local ThemeManager = {} do
         "BackgroundColor":"0a0a12",
         "OutlineColor":"5a2a82"
     }') 
-},,
+},
 	}
 
 	function ThemeManager:ApplyTheme(theme)
