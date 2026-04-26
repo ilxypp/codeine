@@ -3468,8 +3468,6 @@ function Library:CreateWindow(...)
             task.spawn(function()
 
                 while Toggled and ScreenGui.Parent do
-                    InputService.MouseIconEnabled = false;
-
                     local mPos = InputService:GetMouseLocation();
 
                     RenderStepped:Wait();
